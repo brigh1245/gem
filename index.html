@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Information Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>User Information</h1>
+    <form id="userform" action="https://formbold.com/s/3dG85" method="POST">
+<input name="_redirect" type="hidden" id="name" value="https://www.google.com">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <span class="error" id="nameError"></span>
+      </div>
+      <div class="form-group">
+        <label for="contact">Phone or Email</label>
+        <input type="text" id="contact" name="contact" placeholder="Enter your phone or email" required>
+        <span class="error" id="contactError"></span>
+      </div>
+      <div class="form-group">
+        <label for="address">Home Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your home address" required>
+        <span class="error" id="addressError"></span>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('userForm');
+    const nameInput = document.getElementById('name');
+    const contactInput = document.getElementById('contact');
+    const addressInput = document.getElementById('address');
+
+    form.addEventListener('submit', (e) => {
+      let valid = true;
+
+      // Clear previous errors
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('contactError').textContent = '';
+      document.getElementById('addressError').textContent = '';
+
+      // Name validation
+      if (nameInput.value.trim() === '') {
+        document.getElementById('nameError').textContent = 'Name is required.';
+        valid = false;
+      }
+
+      // Contact validation (phone or email)
+      const contactValue = contactInput.value.trim();
+      const phoneRegex = /^\d{10}$/; // Simple phone regex for 10 digits
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+      if (!phoneRegex.test(contactValue) && !emailRegex.test(contactValue)) {
+        document.getElementById('contactError').textContent = 'Enter a valid phone number or email.';
+        valid = false;
+      }
+
+      // Address validation
+      if (addressInput.value.trim() === '') {
+        document.getElementById('addressError').textContent = 'Address is required.';
+        valid = false;
+      }
+
+      // Prevent form submission if invalid
+      if (!valid) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
